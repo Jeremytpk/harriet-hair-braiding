@@ -44,6 +44,27 @@
       await signupUser(name, phone, email, password, role);
       alert('Signup successful! You can now log in.');
     };
+      document.getElementById('signup-form').onsubmit = async function(e) {
+        e.preventDefault();
+        const nameInput = document.getElementById('signup-name');
+        const phoneInput = document.getElementById('signup-phone');
+        const emailInput = document.getElementById('signup-email');
+        const passwordInput = document.getElementById('signup-password');
+        if (!nameInput || !emailInput || !passwordInput) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+        const name = nameInput.value;
+        const phone = phoneInput ? phoneInput.value : '';
+        const email = emailInput.value;
+        const password = passwordInput.value;
+        if (!name || !email || !password) {
+          alert('Name, email, and password are required.');
+          return;
+        }
+        await signupUser(name, phone, email, password, 'client');
+        alert('Signup successful! You can now log in.');
+      };
 
     // Login form handler
     document.getElementById('login-form').onsubmit = async function(e) {
