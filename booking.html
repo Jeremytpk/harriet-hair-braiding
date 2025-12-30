@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment - Harriet Hair Braiding</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main style="max-width:600px;margin:auto;">
+    <h2>Book an Appointment</h2>
+    <form style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:2em;">
+      <label>Full Name<br><input type="text" placeholder="Your Name" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Phone Number<br><input type="tel" placeholder="Your Phone" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Style<br>
+        <select style="width:100%;padding:0.5em;margin-bottom:1em;">
+          <option>Box Braids</option>
+          <option>Cornrows</option>
+          <option>Twists</option>
+        </select>
+      </label><br>
+      <label>Date<br><input type="date" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <button type="submit">Book Now</button>
+    </form>
+    <section style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <h3>Find Your Appointment</h3>
+      <form>
+        <label>Name<br><input type="text" placeholder="Search Name" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+        <label>Phone<br><input type="tel" placeholder="Search Phone" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+        <button type="submit">Search</button>
+      </form>
+      <div style="margin-top:1em;">
+        <p>No appointments found.</p>
+      </div>
+    </section>
+  </main>
+  <script src="js/booking.js"></script>
+  <script>
+    // Simple HTML include for header
+    fetch('header.html').then(r => r.text()).then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+  </script>
+</body>
+</html>

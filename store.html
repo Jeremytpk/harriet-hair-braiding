@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Harriet Hair Braiding</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main style="max-width:1200px;margin:auto;">
+    <h2>Shop Our Products</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:2em;justify-content:center;">
+      <div class="style-card">
+        <span class="badge">PROMO</span>
+        <img src="assets/product1.jpg" alt="Edge Control">
+        <h3>Edge Control</h3>
+        <p>$12.99 | In Stock</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="style-card">
+        <img src="assets/product1.jpg" alt="Hair Beads">
+        <h3>Hair Beads</h3>
+        <p>$5.99 | In Stock</p>
+        <button>Add to Cart</button>
+      </div>
+      <div class="style-card">
+        <span class="badge">20% OFF</span>
+        <img src="assets/product1.jpg" alt="Braiding Gel">
+        <h3>Braiding Gel</h3>
+        <p>$9.99 | In Stock</p>
+        <button>Add to Cart</button>
+      </div>
+    </div>
+    <section style="margin-top:3em;">
+      <h2>Your Cart</h2>
+      <div style="background:#fff;padding:1em;border-radius:10px;max-width:400px;">
+        <p>No items in cart.</p>
+      </div>
+    </section>
+  </main>
+  <script src="js/store.js"></script>
+  <script>
+    // Simple HTML include for header
+    fetch('header.html').then(r => r.text()).then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+// Owner-only functions for dashboard
+// Confirm appointments, upload images, manage styles/products
+// ...implement admin logic...

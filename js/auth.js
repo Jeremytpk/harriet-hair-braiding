@@ -1,0 +1,3 @@
+// Authentication logic for login/signup
+// Uses Firebase Auth
+// ...implement login, signup, session check, role check...

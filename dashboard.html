@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Harriet Hair Braiding</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main id="dashboard-content" style="max-width:1200px;margin:auto;">
+    <h2>Dashboard</h2>
+    <div style="display:flex;gap:2em;flex-wrap:wrap;justify-content:center;">
+      <div style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:300px;">
+        <h3>Upcoming Appointments</h3>
+        <ul>
+          <li>Jan 2, 2026 - Box Braids - Confirmed</li>
+          <li>Jan 5, 2026 - Twists - Pending</li>
+        </ul>
+      </div>
+      <div style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:300px;">
+        <h3>Manage Styles</h3>
+        <button>Add New Style</button>
+        <ul>
+          <li>Box Braids <button>Edit</button></li>
+          <li>Cornrows <button>Edit</button></li>
+        </ul>
+      </div>
+      <div style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);min-width:300px;">
+        <h3>Manage Products</h3>
+        <button>Add New Product</button>
+        <ul>
+          <li>Edge Control <button>Edit</button></li>
+          <li>Braiding Gel <button>Edit</button></li>
+        </ul>
+      </div>
+    </div>
+    <section style="margin-top:3em;background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <h3>Owner Actions</h3>
+      <button>Upload Banner</button>
+      <button>Confirm Appointments</button>
+    </section>
+  </main>
+  <div id="not-owner-message" style="display:none;max-width:600px;margin:3em auto;background:#fff;padding:2em;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.04);color:#e53e3e;font-weight:bold;">
+    You must be logged in as the owner to view this page.
+  </div>
+  <script src="js/admin.js"></script>
+  <script>
+    // Simple HTML include for header
+    fetch('header.html').then(r => r.text()).then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+    // Simulated role check (replace with real Firebase Auth logic)
+    let userRole = localStorage.getItem('userRole') || 'client';
+    if (userRole !== 'owner') {
+      document.getElementById('dashboard-content').style.display = 'none';
+      document.getElementById('not-owner-message').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

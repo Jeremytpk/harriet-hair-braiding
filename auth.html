@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Signup - Harriet Hair Braiding</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main style="max-width:500px;margin:auto;">
+    <h2>Login</h2>
+    <form style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:2em;">
+      <label>Email<br><input type="email" placeholder="Email" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Password<br><input type="password" placeholder="Password" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <button type="submit">Login</button>
+    </form>
+    <h2>Sign Up</h2>
+    <form style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <label>Full Name<br><input type="text" placeholder="Your Name" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Phone Number<br><input type="tel" placeholder="Your Phone" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Email<br><input type="email" placeholder="Email" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Password<br><input type="password" placeholder="Password" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Role<br>
+        <select style="width:100%;padding:0.5em;margin-bottom:1em;">
+          <option value="client">Client</option>
+          <option value="owner">Owner</option>
+        </select>
+      </label><br>
+      <button type="submit">Sign Up</button>
+    </form>
+  </main>
+  <script src="js/auth.js"></script>
+  <script>
+    // Simple HTML include for header
+    fetch('header.html').then(r => r.text()).then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+  </script>
+</body>
+</html>

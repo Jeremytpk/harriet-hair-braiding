@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harriet Hair Braiding - Home</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main>
+    <h2>Featured Styles & Promotions</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:2em;justify-content:center;">
+      <div class="style-card">
+        <span class="badge">PROMO</span>
+        <img src="assets/style1.jpg" alt="Box Braids">
+        <h3>Box Braids</h3>
+        <p>$120 | 3 hr 0 min</p>
+        <button onclick="openBookingModal('Box Braids', 120, 180)">Book Now</button>
+      </div>
+      <div class="style-card">
+        <img src="assets/style1.jpg" alt="Cornrows">
+        <h3>Cornrows</h3>
+        <p>$80 | 1 hr 30 min</p>
+        <button onclick="openBookingModal('Cornrows', 80, 90)">Book Now</button>
+      </div>
+      <div class="style-card">
+        <span class="badge">20% OFF</span>
+        <img src="assets/style1.jpg" alt="Twists">
+        <h3>Twists</h3>
+        <p>$100 | 2 hr 0 min</p>
+        <button onclick="openBookingModal('Twists', 100, 120)">Book Now</button>
+      </div>
+    </div>
+    <section style="margin-top:3em;">
+      <h2>Why Choose Us?</h2>
+      <ul>
+        <li>Professional stylists with years of experience</li>
+        <li>Clean, modern salon environment</li>
+        <li>Easy online booking and management</li>
+        <li>Exclusive promotions for loyal clients</li>
+      </ul>
+    </section>
+  </main>
+  <!-- Booking Modal -->
+  <div id="booking-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:2em 2.5em;border-radius:16px;max-width:400px;width:90vw;box-shadow:0 4px 32px rgba(0,0,0,0.18);position:relative;">
+      <h2 id="modal-style-name">Book Style</h2>
+      <form onsubmit="submitBooking(event)">
+        <input type="hidden" id="modal-style" name="style">
+        <label>Name<br><input type="text" id="modal-name" name="name" required style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+        <label>Phone<br><input type="tel" id="modal-phone" name="phone" required style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+        <label>Date<br><input type="date" id="modal-date" name="date" required style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+        <label>Time<br><input type="time" id="modal-time" name="time" required style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+        <div id="modal-details" style="margin-bottom:1em;color:#444;font-size:1em;"></div>
+        <div style="display:flex;gap:1em;justify-content:flex-end;">
+          <button type="button" onclick="closeBookingModal()" style="background:#ccc;color:#222;">Cancel</button>
+          <button type="submit">Book Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="js/store.js"></script>
+  <script src="js/booking.js"></script>
+  <script>
+    // Simple HTML include for header
+    fetch('header.html').then(r => r.text()).then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+
+    // Modal logic
+    function openBookingModal(style, price, duration) {
+      document.getElementById('booking-modal').style.display = 'flex';
+      document.getElementById('modal-style-name').textContent = 'Book ' + style;
+      document.getElementById('modal-style').value = style;
+      // Convert duration to hr/min
+      var hr = Math.floor(duration / 60);
+      var min = duration % 60;
+      document.getElementById('modal-details').textContent = `$${price} | ${hr} hr ${min} min`;
+    }
+    function closeBookingModal() {
+      document.getElementById('booking-modal').style.display = 'none';
+    }
+    function submitBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('modal-name').value;
+      const phone = document.getElementById('modal-phone').value;
+      const date = document.getElementById('modal-date').value;
+      const time = document.getElementById('modal-time').value;
+      const style = document.getElementById('modal-style').value;
+      const details = document.getElementById('modal-details').textContent;
+      // Parse price and duration from details string
+      const price = details.match(/\$(\d+)/) ? details.match(/\$(\d+)/)[1] : '';
+      const durationMatch = details.match(/(\d+) hr (\d+) min/);
+      const duration = durationMatch ? (parseInt(durationMatch[1]) * 60 + parseInt(durationMatch[2])) : '';
+
+  fetch('https://script.google.com/macros/s/AKfycbxgjFbARlXouf0dyZfJFShLiHjNSWZbe6vcIDY0URtUzvhe1-VmrJPObHaCIBTsnViP/exec', {
+        method: 'POST',
+        mode: 'no-cors', // For Google Apps Script
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name, phone, date, time, style, price, duration
+        })
+      }).then(() => {
+        alert('Booking submitted!');
+        closeBookingModal();
+      }).catch(() => {
+        alert('There was an error submitting your booking.');
+      });
+    }
+  </script>
+</body>
+</html>
