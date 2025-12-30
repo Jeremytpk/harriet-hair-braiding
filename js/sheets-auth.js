@@ -1,6 +1,6 @@
 // Google Sheets Auth API integration for signup/login
 // Replace with your Apps Script Web App URL
-const SHEETS_AUTH_URL = 'https://script.google.com/macros/s/AKfycbwmiWoycA7FZYzAmwds9Dy4Y6E6NesTVHE7O4KXSfbo1h4Zfp62_nLY2x9gF5g0AdGMww/exec';
+const SHEETS_AUTH_URL = 'https://sheetdb.io/api/v1/mg8dwcpcv9i2u';
 
 // Helper: Save user session
 function saveUserSession(email, role) {
