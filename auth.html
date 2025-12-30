@@ -10,32 +10,54 @@
   <div id="header-placeholder"></div>
   <main style="max-width:500px;margin:auto;">
     <h2>Login</h2>
-    <form style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:2em;">
-      <label>Email<br><input type="email" placeholder="Email" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
-      <label>Password<br><input type="password" placeholder="Password" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+    <form id="login-form" style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);margin-bottom:2em;">
+      <label>Email<br><input type="email" id="login-email" placeholder="Email" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Password<br><input type="password" id="login-password" placeholder="Password" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
       <button type="submit">Login</button>
     </form>
     <h2>Sign Up</h2>
-    <form style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-      <label>Full Name<br><input type="text" placeholder="Your Name" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
-      <label>Phone Number<br><input type="tel" placeholder="Your Phone" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
-      <label>Email<br><input type="email" placeholder="Email" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
-      <label>Password<br><input type="password" placeholder="Password" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
-      <label>Role<br>
-        <select style="width:100%;padding:0.5em;margin-bottom:1em;">
-          <option value="client">Client</option>
-          <option value="owner">Owner</option>
-        </select>
-      </label><br>
+    <form id="signup-form" style="background:#fff;padding:2em;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <label>Full Name<br><input type="text" id="signup-name" placeholder="Your Name" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Phone Number<br><input type="tel" id="signup-phone" placeholder="Your Phone" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Email<br><input type="email" id="signup-email" placeholder="Email" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <label>Password<br><input type="password" id="signup-password" placeholder="Password" style="width:100%;padding:0.5em;margin-bottom:1em;"></label><br>
+      <!-- Role is hidden, default is client -->
       <button type="submit">Sign Up</button>
     </form>
   </main>
+  <script src="js/sheets-auth.js"></script>
   <script src="js/auth.js"></script>
   <script>
     // Simple HTML include for header
     fetch('header.html').then(r => r.text()).then(html => {
       document.getElementById('header-placeholder').innerHTML = html;
     });
+
+    // Signup form handler
+    document.getElementById('signup-form').onsubmit = async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const phone = document.getElementById('signup-phone').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const role = document.getElementById('signup-role').value;
+      await signupUser(name, phone, email, password, role);
+      alert('Signup successful! You can now log in.');
+    };
+
+    // Login form handler
+    document.getElementById('login-form').onsubmit = async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      try {
+        const role = await loginUser(email, password);
+        alert('Login successful!');
+        window.location.href = role === 'owner' ? 'dashboard.html' : 'index.html';
+      } catch (err) {
+        alert('Login failed: ' + err.message);
+      }
+    };
   </script>
 </body>
 </html>
